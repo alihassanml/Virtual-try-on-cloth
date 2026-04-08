@@ -1,0 +1,238 @@
+Try-And-Buy
+Final Year Project Proposal
+BSCS
+By
+S#
+Name
+Registration /Roll /Section
+Mobile #
+E-Mail
+1.
+MISBAH AYAZ
+FA-2022/BSCS/100
+0326-5043101
+Fa22-BSCS-100@cs.lgu.edu.pk
+2.
+ANUM SHEHZADI
+FA-2022/BSCS/459
+0335-4499185
+Fa22-BSCS-459@cs.lgu.edu.pk
+Supervised by:
+Sir Khurram Yousaf___________________ (Signature)
+  
+Department of Computer Science
+Lahore Garrison University
+Lahore
+Table of Contents
+1.Introduction3
+1.1 Background and context3
+1.2 Project Motive3
+2.Problem Statement4
+3.Literature Review4
+4.Project Scope6
+4.1 In scope6
+4.2 Out of Scope Components6
+4.3 Constraints and assumptions7
+5.Methodology7
+5.1 Overview7
+5.2 Phases7
+5.3 Tools & Technologies9
+5.4 Use-Case Diagram10
+5.5 Activity Diagram11
+6.Project Milestone and Deliverable12
+6.1 Gantt Chart13
+7.Conclusion14
+8.Reference14
+Abstract
+The project “Try and Buy” Virtual Try-On Web Application aims to revolutionize online apparel shopping by integrating Web technologies with Artificial Intelligence (AI), Machine Learning (ML), and Deep Learning (DL) to enable users to virtually try on clothes before making a purchase. The system allows users to upload or capture their image, after which AI-based body segmentation and garment overlay models visualize how the selected clothing item would appear on them in real-time. This approach reduces enhances customer satisfaction, and minimizes product return rates. The application is designed using React.js, Node.js, MongoDB, and Python (Flask, OpenCV, MediaPipe). It provides an efficient, scalable, and realistic try-on experience, bridging the gap between physical and digital fashion retail.
+1.Introduction
+1.1 Background and Context
+The global e-commerce fashion market has experienced unprecedented growth, the global e-commerce market was valued at approximately $29.46 trillion in 2024. In Pakistan, the market size was $7.7 billion in 2024, with a projected annual growth rate of 17% . However, this growth is hampered by a fundamental limitation: the inability for customers to physically try on clothing before purchase. This deficiency results in significant challenges for both consumers and retailers, including:
+High return rates.
+Customer dissatisfaction: 72% of online shoppers report uncertainty about clothing fit as their primary concern.
+Economic impact: Retailers lose approximately $62 billion annually due to return processing.
+Traditional solutions have proven insufficient to address these challenges, creating a critical need for innovative technological solutions.
+1.2 Project Motivation
+The "Try and Buy" project emerges from the convergence of several technological and market factors:
+Technological Enablers:
+Advancements in computer vision and deep learning algorithms
+Improved computational capabilities in web browsers
+Availability of robust pose estimation libraries (MediaPipe,OpenCV)
+Mature web development frameworks (React.js, Node.js)
+Market Needs:
+Consumer demand for enhanced online shopping experiences
+Retailer interest in reducing return rates and increasing conversion
+Growing acceptance of AI-powered solutions in everyday applications
+2.Problem statement
+Currently, online shopping platforms rely on static images, which fail to account for individual body proportions, posture, and personal style preferences. As a result:
+Around 30–40% of purchased clothes are returned due to unmet expectations.
+The Try and Buy system addresses this problem by enabling users to virtually try on clothing using AI-based body segmentation and garment overlay. This approach increases buyer confidence, reduces return rates, and enhances the online shopping experience.
+3.Literature review
+The growing demand for realistic and interactive online fashion experiences has led to extensive research on Virtual Try-On systems. This section reviews recent works (2021–2025) focusing on methodologies, datasets, models, and outcomes that have advanced the state of virtual try-on technologies.
+Methodology: The authors proposed FITMI, an AI-powered pipeline integrating pose estimation, texture mapping, and semantic segmentation to create realistic virtual try-on visuals.Model/Dataset: The system was trained using a customized clothing dataset built upon VITON-HD with additional texture and lighting variations.Results: FITMI achieved high realism and garment fit accuracy, reducing pixel distortion by 17% compared to baseline VTON models.Significance: The paper suggests a robust, production-level framework adaptable for e-commerce integration. [1]
+Methodology: A comprehensive survey reviewing over 100 virtual try-on papers focusing on image-based architecture.Model/Dataset: The authors categorized existing VTON systems by methodology (geometric wraping, human parsing, attention-guided refinement) and benchmarked them using DeepFashion, and VITON-HD datasets.Results: The survey identified persistent challenges in pose variance, texture consistency, and identity preservation.Significance: Recommended integrating attention-guided GANs and pose-flow networks for next-generation try-on models. [2]
+Methodology: Proposed a lightweight prototype system using MediaPipe Pose Estimation and OpenCV to overlay garments on 2D human images.Model/Dataset: Utilized an open-source image dataset of 200 clothing samples and user-uploaded photos for testing.Results: The system achieved quick rendering times (under 2 seconds) but moderate alignment accuracy, suitable for real-time web applications.Significance: Suggested for low-cost or academic VTO prototypes; validated the efficiency of Python Flask integration with CV libraries. [3]
+Methodology: Introduced StyleVTON, a multi-pose try-on model combining pose-invariant representation learning with style encoding GANs.Model/Dataset: Trained on DeepFashion2 with additional human pose labels to enhance model robustness.Results: Preserved facial identity and clothing textures with an SSIM score of 0.86 and FID improvement of 12% over prior models.Significance: Recommended for applications where maintaining realism across pose changes is essential. [4]
+Methodology: Developed a co-attention feature remapping network that refines the alignment between the person and the clothing image using sequential pose templates.Model/Dataset: Trained on VITON dataset with 12,000 image pairs.Results: Outperformed classical geometric matching modules by improving garment alignment under diverse body postures.Significance: Proposed a foundation for the attention-guided architectures used in later models like StyleVTON and FITMI. [5]
+Methodology: Proposed an Occlusion-Aware Warping GAN (OAW-GAN) to address misalignment and occlusion during garment transfer.Model/Dataset: Evaluated on VITON-HD and DeepFashion2 datasets.Results: Achieved superior realism , handling self-occlusions effectively.Significance: Recommended as a baseline for models dealing with body-blocking regions in real-world scenarios. [6]
+Methodology: Designed a multi-category try-on framework for tops, bottoms, and dresses using semantic segmentation and texture fusion.Model/Dataset: Introduced DressCode Dataset, containing 50,000 paired clothing images across multiple categories.Results: Achieved state-of-the-art results on category-specific try-ons with balanced realism and computation time.Significance: Set a new benchmark for high-resolution VTO tasks involving multiple garment types. [7]
+Methodology: A commercial prototype integrating Google’s DeepPose and real-time rendering in AR environments for consumer virtual try-on.Model/Dataset: Uses proprietary datasets collected through body scan APIs and e-commerce image repositories.Results: Offers seamless mobile-based try-on with user identity preservation and ethical data use policies.Significance: Demonstrates practical, large-scale deployment of AI-based try-on in real consumer environments, bridging academic and commercial research. [8]
+4.Project scope
+The scope of this project is to design and develop a web-based virtual try-on system that integrates AI, ML, and DL techniques to enable users to preview how garments fit and look on their bodies.The system will provide:
+A user-friendly web interface for browsing clothing items. Secure authentication and user profile management.
+Real-time image processing and garment overlay.Integration of OpenCV and MediaPipe for pose detection and segmentation.
+Storage of clothing data, user preferences, and try-on history in MongoDB.
+The project focuses primarily overlay clothing visualization and aims to deliver a realistic, interactive, and scalable virtual fitting solution.
+4.1 In-Scope Components
+4.1.1 Core Functionality:
+User Management System
+Virtual Try-On Engine
+Product Management System
+E-commerce Integration
+4.1.2 Technical Scope:
+Platform Support: Web browsers on desktop and mobile
+Image Quality: Minimum 480p
+Processing Time: <5 seconds
+4.2 Out-of-Scope Components
+Full-body try-on
+Advanced fabric physics simulation
+Mobile app development
+ERP integration
+Multi-person try-on
+4.3 Constraints and Assumptions
+4.3.1 Technical Constraints:
+Minimum 2 Mbps internet
+Client device RAM >= 2GB
+Garment images follow formatting guidelines
+4.3.2 User Assumptions:
+Clear, well-lit images
+Basic digital literacy
+Consent for temporary image processing
+5.Methodology
+The proposed Virtual Try-On web application follows an Agile-based iterative methodology combined with AI/ML-driven prototyping for continuous testing and refinement. This ensures efficient development, frequent feedback, and seamless integration of deep learning components.
+5.1 Overview of Methodology
+The methodology combines:
+Agile Software Development Life Cycle (SDLC) for web application modules (frontend, backend, UI/UX).
+AI/ML Research Cycle for model training, testing, and integration.
+Prototyping approach for user interaction and try-on accuracy evaluation.
+5.2 Phases of the Methodology
+Requirement Analysis
+Identify functional and non-functional requirements.
+Gather datasets for body segmentation and cloth images.
+Define user roles (admin, vendor, customer).
+System & AI Model Design
+Design the system architecture integrating AI modules with the web app
+Select frameworks: OpenCV, MediaPipe for body pose and segmentation; Flask for backend AI integration.
+Create ER diagrams, data flow diagrams (DFDs)
+Data Collection and Preprocessing
+Gather clothing images and human body datasets (e.g., DeepFashion, VITON).
+Apply preprocessing steps:
+Image resizing and normalization
+Background removal
+Keypoint extraction (pose estimation)
+Split data into training, validation, and test sets.
+Model Development and Training
+Implement model using MediaPipe for body landmark detection.
+Train U-Net or SegNet for human segmentation.
+Use GAN-based model (e.g., VITON-HD) to virtually overlay clothes.
+Evaluate model with metrics like IoU (Intersection over Union) and PSNR (Peak Signal-to-Noise Ratio).
+System Development
+Frontend: Developed in React.js with responsive UI.
+Backend: Flask API connects the AI module with the main app; Node.js handles business logic and database operations.
+Database: MongoDB for user data, images, and product details.
+Integration between AI/ML model and web app.
+Testing and Validation
+Conduct unit and integration testing for both web and AI components.
+Perform user acceptance testing (UAT) to ensure realistic try-on results.
+Tools: Postman (API testing), Selenium (UI testing).
+Deployment
+Deploy web app and AI model using Flask API.
+Integrate CDN for image optimization.
+Configure CI/CD pipeline for continuous updates.
+Evaluation and Feedback
+Gather user feedback for improvement.
+Evaluate system usability and accuracy of virtual try-on output
+Layer
+Technology
+Purpose
+Frontend (Web)
+React.js + Tailwind CSS
+User interface, responsive web pages
+Backend
+Node.js
+API endpoints, handle uploads, connect AI model
+Database
+MongoDB
+Store user data, clothing catalog, history
+AI / ML Module
+Python (Flask )
+Image processing, virtual try-on model
+Storage
+Cloud (AWS S3)
+Store clothing images and user photos
+5.3 Tools and Technologies
+The architecture diagram represents seamless communication between the user interface, backend, AI module, and cloud storage.
+5.4 Use Case Diagram
+5.5 Activity Diagram
+6.Project Milestones and Deliverable
+Milestone No.
+Phase
+Duration
+Deliverables
+M1
+Project Planning & Requirement Analysis
+2 weeks
+Requirement Specification Document (Functional & Non-Functional Requirements) - Project Plan and Gantt Chart - Feasibility Study Report
+M2
+UI/UX Design
+3 weeks
+Wireframes for all major pages - User Flow Diagrams - Design System (Color Palette, Typography, Components)
+M3
+System Architecture & Database Design
+2 weeks
+System Architecture Diagram - Microservices Design Document - Database Schema and Indexing Strategy - API Specifications
+M4
+Frontend Development (Phase 1)
+2 weeks
+React Components for Landing, Login/Registration, Profile Management - Navigation & Routing Setup - Responsive UI Implementation
+M5
+Backend Development (Phase 1)
+2 weeks
+User Authentication & Management APIs - Product Catalog & Search APIs - Database Integration (MongoDB )
+M6
+AI/ML Integration
+3 weeks
+Pose Estimation Module (MediaPipe) - Body Segmentation Module (U-Net) - Garment Processing & Virtual Try-On Rendering - AI API Endpoints (FastAPI)
+M7
+Frontend Development (Phase 2)
+2 weeks
+Try-On Module UI - Product Detail Page & Cart Interface - Checkout Page UI & Payment Integration - Mobile Responsiveness
+M8
+Backend Development (Phase 2)
+2 weeks
+Order Processing & Payment APIs - Shopping Cart API - Logging & Monitoring Setup - Security Implementation ( Encryption)
+M9
+Testing & Quality Assurance
+3 weeks
+Unit Testing Reports, Integration Testing Reports, User Acceptance Testing (UAT) Feedback, Bug Fixes & Optimizations
+M10
+Deployment & Documentation
+2 weeks
+Production Deployment ( CDN Setup)  CI/CD Pipelines , System & API Documentation - User Manual
+M11
+Project Closure
+1 week
+Final Project Report - Demo Video of Application - Lessons Learned & Future Recommendations
+6.1 Gantt Chart
+7.Conclusion
+The Try and Buy - Virtual Try-On Web Application offers an innovative and practical approach to solving one of e-commerce’s most pressing challenges — lack of fitting visualization. By integrating AI, ML, and DL into a web-based system, the project delivers a smart, interactive, and efficient solution that enhances customer satisfaction and retailer trust. It demonstrates how modern computer vision and machine learning technologies can create real-world impact in fashion retail. This system not only reduces operational inefficiencies but also sets a foundation for future advancements like 3D try-on and augmented reality-based fitting rooms.
+8.Reference
+1. Samy, Tassneam M., et al. "Revolutionizing online shopping with FITMI: A realistic virtual 2. try-on solution." Neural Computing and Applications 37.8 (2025): 6125-6144.
+2. Song, D., Zhang, X., Zhou, J., Nie, W., Tong, R., Kankanhalli, M. and Liu, A.A., 2025. Image-based virtual try-on: A survey. International Journal of Computer Vision, 133(5), pp.2692-2720.
+3. Krishnapriya, Nair, et al. "Virtual Try-On System Using MediaPipe and OpenCV for AI-Based Clothing Overlay." IJSAT-International Journal on Science and Technology 16.2 (2025).
+4. Islam, Tasin, Alina Miron, Xiaohui Liu, and Yongmin Li. "StyleVTON: A multi-pose virtual try-on with identity and clothing detail preservation." Neurocomputing 594 (2024): 127887.
+5. Chen, Chieh-Yun, et al. "Fashionmirror: Co-attention feature-remapping virtual try-on with sequential template poses." Proceedings of the IEEE/CVF International Conference on Computer Vision. 2021.
+6. Lee, Sangyun, et al. "High-resolution virtual try-on with misalignment and occlusion-handled conditions." European Conference on Computer Vision. Cham: Springer Nature Switzerland, 2022.
+7. Morelli, Davide, et al. "Dress code: High-resolution multi-category virtual try-on." Proceedings of the IEEE/CVF conference on computer vision and pattern recognition. 2022.
+8. Google Labs / Doppl product pages and blog for a view of current consumer implementations and UX/ethical considerations. 
+https://labs.google/doppl

@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx tsc:*)",
+      "Bash(node_modules/.bin/tsc --noEmit)",
+      "Bash(pip show:*)",
+      "Bash(pip install:*)",
+      "Bash(python -c \"import main; routes = [r.path for r in main.app.routes]; print\\('\\\\n'.join\\(r for r in routes if 'occasion' in r or 'health' in r\\)\\)\")"
+    ]
+  }
+}

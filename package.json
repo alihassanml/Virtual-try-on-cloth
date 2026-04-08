@@ -1,0 +1,26 @@
+{
+  "name": "final-year-project",
+  "version": "1.0.0",
+  "description": "SmartSurv is a next-gen AI surveillance system designed to transform traditional CCTV setups into **proactive**, **intelligent**, and **automated** security networks.\r Instead of humans staring at dozens of screens, SmartSurv does the heavy lifting — detecting illegal activities, identifying threats, and tracking individuals across multiple cameras in real time.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run frontend\" \"npm run backend\"",
+    "frontend": "cd frontend && npm run dev",
+    "backend": "cd backend && uvicorn main:app --reload"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alihassanml/SmartSurv.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/alihassanml/SmartSurv/issues"
+  },
+  "homepage": "https://github.com/alihassanml/SmartSurv#readme",
+  "dependencies": {
+    "concurrently": "^9.2.1"
+  }
+}

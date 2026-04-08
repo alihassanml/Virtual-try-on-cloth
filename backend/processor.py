@@ -188,12 +188,12 @@ class VirtualTryOnProcessor:
         return cloth_img
 
     def process_try_on(self, person_image_bytes, cloth_image_bytes):
-        # --- ATTEMPT 1: State-of-the-Art HuggingFace API (IDM-VTON) ---
+        # --- ATTEMPT 1: State-of-the-Art HuggingFace API ---
+        api_spaces = ["yisol/IDM-VTON", "jallenjia/Change-Clothes-AI"]
+        
         try:
             from gradio_client import Client, handle_file
             import tempfile
-            
-            print("Attempting high-accuracy IDM-VTON via HuggingFace API...")
             
             # Save bytes to temp files for gradio client
             with tempfile.NamedTemporaryFile(delete=False, suffix=".jpg") as p_tmp:
@@ -203,34 +203,54 @@ class VirtualTryOnProcessor:
             with tempfile.NamedTemporaryFile(delete=False, suffix=".jpg") as c_tmp:
                 c_tmp.write(cloth_image_bytes)
                 cloth_path = c_tmp.name
-                
-            client = Client("yisol/IDM-VTON")
-            result = client.predict(
-                dict={"background": handle_file(person_path), "layers": [], "composite": None},
-                garm_img=handle_file(cloth_path),
-                garment_des="A top",
-                is_checked=True,
-                is_checked_crop=False,
-                denoise_steps=30,
-                seed=42,
-                api_name="/tryon"
-            )
+
+            for space_name in api_spaces:
+                try:
+                    print(f"Attempting high-accuracy IDM-VTON via {space_name}...")
+                    client = Client(space_name)
+                    
+                    # Prepare arguments
+                    kwargs = {
+                        "dict": {"background": handle_file(person_path), "layers": [], "composite": None},
+                        "garm_img": handle_file(cloth_path),
+                        "garment_des": "A top",
+                        "is_checked": True,
+                        "is_checked_crop": False,
+                        "denoise_steps": 30,
+                        "seed": 42,
+                        "api_name": "/tryon"
+                    }
+                    
+                    # Category is required for jallenjia
+                    if "jallenjia" in space_name:
+                        kwargs["category"] = "upper_body"
+
+                    result = client.predict(**kwargs)
+                    
+                    # The result is a tuple, index 0 contains the URL/path to the output image
+                    output_path = result[0]
+                    with open(output_path, "rb") as f:
+                        output_bytes = f.read()
+                        
+                    # Cleanup
+                    os.remove(person_path)
+                    os.remove(cloth_path)
+                    
+                    print(f"Successfully processed via {space_name}!")
+                    return output_bytes, None
+                    
+                except Exception as api_err:
+                    print(f"API {space_name} failed: {api_err}")
             
-            # The result is a tuple, index 0 contains the URL/path to the output image
-            output_path = result[0]
-            with open(output_path, "rb") as f:
-                output_bytes = f.read()
-                
-            # Cleanup
-            os.remove(person_path)
-            os.remove(cloth_path)
+            # If we reach here, all APIs failed
+            print("All HuggingFace APIs failed or timed out.")
+            if os.path.exists(person_path): os.remove(person_path)
+            if os.path.exists(cloth_path): os.remove(cloth_path)
             
-            print("Successfully processed via IDM-VTON API!")
-            return output_bytes, None
-            
-        except Exception as api_err:
-            print(f"HuggingFace API Try-On failed (Queued/Timeout): {api_err}")
-            print("Falling back to absolute local geometric + neural processing...")
+        except Exception as setup_err:
+            print(f"API Setup failed: {setup_err}")
+
+        print("Falling back to absolute local geometric + neural processing...")
             
         # --- ATTEMPT 2: Local CP-VTON / OpenCV Fallback ---
         # 1. Load Images

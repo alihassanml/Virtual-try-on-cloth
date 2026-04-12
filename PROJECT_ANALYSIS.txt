@@ -1,0 +1,100 @@
+# PROJECT ANALYSIS: VIRTUAL TRY-ON AI PLATFORM
+
+This document provides a comprehensive overview of the technical stack, AI models, integrations, and features of the Virtual Try-On project to assist in the creation of the Software Requirements Specification (SRS).
+
+## 1. CORE TECHNOLOGY STACK
+
+### Frontend
+- **Framework**: React 19 (Modern functional components)
+- **Build Tool**: Vite 8 (Fast development and bundling)
+- **Language**: TypeScript (Type-safe development)
+- **Styling**: Tailwind CSS 4 (Glassmorphic, premium dark-mode design)
+- **Animations**: Framer Motion (Smooth transitions and micro-interactions)
+- **Icons**: Lucide React
+- **Navigation**: React Router 7
+- **State/Auth**: React Context API & Axios for API communication
+
+### Backend
+- **Framework**: FastAPI (High-performance Python web framework)
+- **Language**: Python 3.x
+- **Server**: Uvicorn (ASGI server)
+- **Database**: SQLite (local file-based relational database)
+- **Auth System**: JWT (JSON Web Tokens) with bcrypt password hashing
+- **Mailing**: SMTP integration for account verification codes
+
+---
+
+## 2. ARTIFICIAL INTELLIGENCE & MODELS
+
+The project uses a hybrid AI architecture (Cloud + Local Fallback):
+
+### High-Accuracy Cloud Models (Primary)
+- **IDM-VTON**: Integrated via HuggingFace Spaces/Gradio Client for state-of-the-art realistic garment mapping.
+
+### Local Neural Models (Fallback)
+- **CP-VTON (TOM - Try-On Module)**: A Generative Adversarial Network (GAN) model in ONNX format (`cp_vton_tom.onnx`) executed via **onnxruntime**.
+
+### Computer Vision & Body Analysis
+- **Mediapipe**: Used for:
+    - Pose Landmarking (Detecting 33 body points)
+    - Segmentation Masks (Extracting human body from background)
+- **OpenCV**: Used for:
+    - Geometric Warping (Perspective transformation of clothes)
+    - Fabric Blending (Seamless cloning and alpha blending)
+    - Image Pre-processing (Auto-cropping garments)
+- **Body Measurement Logic**: Custom algorithms to calculate shoulder width and height ratio for **AI Size Recommendation** (S/M/L/XL).
+
+### Generative AI & LLMs
+- **Groq API (Llama 4)**: Used for the "Occasion AI" styling suggestions.
+- **Pollinations AI**: Used for generating high-quality fashion inspiration images based on AI suggestions.
+
+---
+
+## 3. CORE FEATURES & MODULES
+
+The application is organized into several key "Tabs" and workspaces:
+
+### 1. Virtual Studio (Core)
+- **Model Upload**: Support for local files, webcam capture, or Image URLs.
+- **Garment Upload**: Upload specific clothing items to try on.
+- **AI Processing**: Real-time generation of the "Try-On" result.
+- **3D Viewer**: Interactive CSS-based 3D rotation system to view the result from different perspectives.
+- **Download/Save**: Option to download high-res results or save them to history.
+
+### 2. AI Store (E-commerce)
+- **Product Catalog**: Dynamic list of clothing items available for purchase.
+- **Direct Try-On**: One-click "Try-On" for any product in the store.
+- **Cart System**: Ability to add items, adjust quantities, and manage a shopping cart.
+- **Checkout**: Mock payment gateway integration (Credit Card details + Shipping).
+
+### 3. Occasion AI (Fashion Stylist)
+- **Intelligent Search**: Users enter an occasion (e.g., "Summer Wedding", "Tech Interview").
+- **AI Styling**: Returns color recommendations, outfit items, and "What to Avoid".
+- **Visual Inspiration**: Generates an AI image of the recommended style.
+
+### 4. History Lab
+- **Cloud Storage**: Every successful try-on is stored in the user's history in the database.
+- **Retry Logic**: Re-open any past session with a single click.
+- **Stat Tracking**: View the body measurements detected during that specific session.
+
+### 5. My Photos
+- **Asset Library**: A personal library (LocalStorage) to store frequently used model photos or garment items for quick access.
+
+### 6. Orders & Admin
+- **Order Tracking**: Users can view their past purchases and shipping status.
+- **Admin Dashboard**: Secure panel for admins to add/delete products and view all customer orders.
+
+---
+
+## 4. INTEGRATIONS SUMMARY
+- **Groq**: Advanced LLM for fashion logic.
+- **Mediapipe**: Real-time human pose estimation.
+- **Gradio Client**: Bridge to high-end cloud GPU clusters for IDM-VTON.
+- **SMTP**: Automated email security for user registration.
+- **Pollinations AI**: Real-time prompt-to-image generation.
+
+## 5. REPOSITORY STRUCTURE
+- `/frontend`: React application code, styles, and components.
+- `/backend`: FastAPI server, database logic, and AI processor.
+- `/Test Images`: Curated set of images for testing model accuracy.
+- `/Document`: Project documentation and resources.

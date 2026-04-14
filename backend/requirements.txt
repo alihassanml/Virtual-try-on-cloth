@@ -11,3 +11,11 @@ tensorboardX
 Pillow
 requests
 protobuf==4.25.3
+jwt
+pydantic
+bcrypt
+pyjwt
+python-dotenv
+requests
+onnxruntime
+gradio_client

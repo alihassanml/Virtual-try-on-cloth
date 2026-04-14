@@ -1,4 +1,3 @@
-backend/.env
 backend/__pycache__
 backend/checkpoints
 backend/cp_vton_gmm.onnx
@@ -7,4 +6,5 @@ node_modules
 backend/__pycache__
 backend/HR-VITON
 backend/HR-VITON-code
+backend/env
 .env

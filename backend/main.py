@@ -16,6 +16,8 @@ from fastapi.responses import Response
 from pydantic import BaseModel
 from typing import Optional
 from processor import processor
+from huggingface_hub import InferenceClient
+import io
 
 load_dotenv()
 
@@ -30,6 +32,7 @@ GROQ_API_KEY    = os.getenv("GROQ_API_KEY")
 ADMIN_USERNAME  = os.getenv("ADMIN_USERNAME", "admin")
 ADMIN_PASSWORD  = os.getenv("ADMIN_PASSWORD", "admin123")
 ADMIN_SECRET    = "admin-tryandbuy-secret-key"
+HF_TOKEN        = os.getenv("HF_TOKEN")
 
 app.add_middleware(
     CORSMiddleware,
@@ -488,6 +491,25 @@ Return ONLY a JSON object (no markdown, no explanation) with exactly these field
 
         data = response.json()
         result = json.loads(data["choices"][0]["message"]["content"])
+
+        # Generate Image if HF_TOKEN is available
+        if HF_TOKEN and result.get("outfit_suggestions"):
+            try:
+                client = InferenceClient(provider="fal-ai", api_key=HF_TOKEN)
+                s = result["outfit_suggestions"][0]
+                img_prompt = f"Full body shot, head-to-toe fashion photography of a model wearing {', '.join(s.get('items', []))}, {result.get('occasion_type', 'casual')} style, {result.get('recommended_colors', ['neutral'])[0]} color palette, professional lighting, clean white studio background"
+                
+                image = client.text_to_image(img_prompt, model="baidu/ERNIE-Image")
+                
+                # Convert PIL image to base64
+                buffered = io.BytesIO()
+                image.save(buffered, format="JPEG")
+                img_str = base64.b64encode(buffered.getvalue()).decode()
+                result["image_base64"] = f"data:image/jpeg;base64,{img_str}"
+            except Exception as img_err:
+                print(f"[Image Gen Error] {img_err}")
+                result["image_base64"] = None
+
         return result
     except HTTPException:
         raise

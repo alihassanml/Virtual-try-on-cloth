@@ -462,8 +462,9 @@ const DashboardPage: React.FC = () => {
       const res = await api.post('/occasion-suggest', { occasion: occasionInput });
       const data = res.data;
       setOccasionResult(data);
-      // Build image URL once (not in render to avoid re-generation)
-      if (data.outfit_suggestions?.[0]) {
+      if (data.image_base64) {
+        setOccasionImageUrl(data.image_base64);
+      } else if (data.outfit_suggestions?.[0]) {
         const s = data.outfit_suggestions[0];
         const prompt = encodeURIComponent(
           `fashion model wearing ${s.items?.join(', ')}, ${data.occasion_type} style, ${data.recommended_colors?.[0] || 'neutral'} color palette, professional fashion photography, full body shot, clean white studio background`
@@ -1604,8 +1605,8 @@ const DashboardPage: React.FC = () => {
                             <div className="relative">
                               <img
                                 src={occasionImageUrl}
-                                className="w-full object-cover"
-                                style={{ maxHeight: '380px', minHeight: '200px' }}
+                                className="w-full object-contain"
+                                style={{ maxHeight: '500px', minHeight: '300px' }}
                                 alt="AI outfit look"
                                 onError={e => {
                                   const el = e.target as HTMLImageElement;

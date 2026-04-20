@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  Sparkles, ShoppingBag, Package, Trash2, Plus, Upload,
+  ShoppingBag, Package, Trash2, Plus, Upload,
   LogOut, Loader2, X, DollarSign, Eye, RefreshCw, Users
 } from 'lucide-react';
 import axios from 'axios';
@@ -136,10 +136,7 @@ const AdminPage: React.FC = () => {
           className="w-full max-w-sm p-8 rounded-3xl space-y-6"
           style={{ background: '#0e0e1c', border: '1px solid rgba(255,255,255,0.08)' }}>
           <div className="flex flex-col items-center gap-3">
-            <div className="w-14 h-14 rounded-2xl flex items-center justify-center"
-              style={{ background: 'linear-gradient(135deg,#d946ef,#f472b6)' }}>
-              <Sparkles className="w-7 h-7 text-white" />
-            </div>
+            
             <div className="text-center">
               <p className="text-white font-black text-xl">Admin Panel</p>
               <p className="text-white/30 text-xs mt-0.5">TryAndBuy · Restricted Access</p>
@@ -183,10 +180,7 @@ const AdminPage: React.FC = () => {
       <div className="sticky top-0 z-40 px-6 py-4 flex items-center justify-between"
         style={{ background: 'rgba(14,14,28,0.95)', borderBottom: '1px solid rgba(255,255,255,0.07)', backdropFilter: 'blur(20px)' }}>
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl flex items-center justify-center"
-            style={{ background: 'linear-gradient(135deg,#d946ef,#f472b6)' }}>
-            <Sparkles className="w-4 h-4 text-white" />
-          </div>
+          
           <div>
             <p className="text-white font-black text-base leading-none">TryAndBuy</p>
             <p className="text-white/25 text-[10px] font-bold uppercase tracking-widest">Admin Panel</p>

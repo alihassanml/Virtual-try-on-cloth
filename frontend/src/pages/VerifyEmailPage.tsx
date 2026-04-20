@@ -3,7 +3,7 @@ import { useNavigate, useSearchParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useAuth } from '../contexts/AuthContext';
 import { api } from '../services/api';
-import { Loader2, Sparkles, ArrowRight, RotateCcw } from 'lucide-react';
+import { Loader2, ArrowRight, RotateCcw } from 'lucide-react';
 
 const VerifyEmailPage: React.FC = () => {
   const [searchParams] = useSearchParams();
@@ -110,10 +110,6 @@ const VerifyEmailPage: React.FC = () => {
           style={{ background: 'linear-gradient(to right,transparent 60%,#08080f 100%)' }}
         />
         <div className="absolute top-8 left-8 flex items-center gap-2.5">
-          <div className="w-9 h-9 rounded-xl flex items-center justify-center"
-            style={{ background: 'linear-gradient(135deg,#d946ef,#f472b6)' }}>
-            <Sparkles className="w-4 h-4 text-white" />
-          </div>
           <span className="text-white font-black text-xl tracking-tight">
             Try<span className="text-transparent bg-clip-text"
               style={{ backgroundImage: 'linear-gradient(135deg,#d946ef,#f472b6)' }}>And</span>Buy
@@ -137,10 +133,7 @@ const VerifyEmailPage: React.FC = () => {
 
         {/* Mobile logo */}
         <div className="lg:hidden flex items-center gap-2 mb-10 self-start">
-          <div className="w-8 h-8 rounded-xl flex items-center justify-center"
-            style={{ background: 'linear-gradient(135deg,#d946ef,#f472b6)' }}>
-            <Sparkles className="w-4 h-4 text-white" />
-          </div>
+          
           <span className="text-white font-black text-lg">TryAndBuy</span>
         </div>
 

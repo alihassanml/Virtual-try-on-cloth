@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Sparkles, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const SLIDES = [
@@ -102,11 +102,6 @@ const LandingPage: React.FC = () => {
       {/* Logo top-left */}
       <div className="absolute top-6 left-6 z-30">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-xl flex items-center justify-center"
-            style={{ background: 'linear-gradient(135deg, #d946ef, #f472b6)' }}
-          >
-            <Sparkles className="w-4 h-4 text-white" />
-          </div>
           <span className="text-white font-black text-lg tracking-tight">
             Try<span className="text-transparent bg-clip-text"
               style={{ backgroundImage: 'linear-gradient(135deg, #d946ef, #f472b6)' }}>And</span>Buy

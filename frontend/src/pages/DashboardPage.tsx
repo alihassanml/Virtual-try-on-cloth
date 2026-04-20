@@ -4,7 +4,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { api } from '../services/api';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  Sparkles, LogOut, LayoutDashboard, History as HistoryIcon,
+  LogOut, LayoutDashboard, History as HistoryIcon,
   Upload, Camera, Trash2, Download, RotateCcw, ZoomIn, ZoomOut,
   X, Loader2, Activity, Link as LinkIcon, ChevronRight,
   Maximize2, User as UserIcon, Plus, CheckCircle2,
@@ -688,10 +688,6 @@ const DashboardPage: React.FC = () => {
         {/* Logo */}
         <div className="px-6 py-7 border-b" style={{ borderColor: 'rgba(255,255,255,0.06)' }}>
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
-              style={{ background: 'linear-gradient(135deg,#d946ef,#f472b6)' }}>
-              <Sparkles className="w-4.5 h-4.5 text-white" />
-            </div>
             <div>
               <p className="text-white font-black text-base leading-none">
                 Try<span className="text-transparent bg-clip-text"
@@ -820,7 +816,6 @@ const DashboardPage: React.FC = () => {
                     style={{ border: '3px solid transparent', borderTopColor: '#d946ef', borderRightColor: '#f472b6' }} />
                   <div className="absolute inset-3 rounded-full flex items-center justify-center"
                     style={{ background: 'rgba(217,70,239,0.1)' }}>
-                    <Sparkles className="w-5 h-5" style={{ color: '#d946ef' }} />
                   </div>
                 </div>
                 <div className="text-center">
@@ -960,7 +955,7 @@ const DashboardPage: React.FC = () => {
                     <button onClick={() => tryProductInStudio(selectedProduct)}
                       className="w-full py-3.5 rounded-2xl font-black text-white flex items-center justify-center gap-2 transition-all hover:scale-[1.02]"
                       style={{ background: 'linear-gradient(135deg,#c084fc,#d946ef)', boxShadow: '0 0 24px rgba(217,70,239,0.35)' }}>
-                      <Sparkles className="w-4 h-4" /> Try This On
+                      Try This On
                     </button>
                     <button onClick={async () => { await handleAddToCart(selectedProduct.id); setSelectedProduct(null); setShowCart(true); }}
                       className="w-full py-3.5 rounded-2xl font-black text-white flex items-center justify-center gap-2 transition-all hover:scale-[1.02]"
@@ -1543,7 +1538,7 @@ const DashboardPage: React.FC = () => {
                             <button onClick={() => tryProductInStudio(product)}
                               className="py-2 rounded-xl font-bold text-xs flex items-center justify-center gap-1 transition-all hover:scale-105"
                               style={{ background: 'rgba(192,132,252,0.12)', border: '1px solid rgba(192,132,252,0.25)', color: '#c084fc' }}>
-                              <Sparkles className="w-3 h-3" /> Try
+                              Try
                             </button>
                             <button onClick={() => handleAddToCart(product.id)}
                               disabled={cartAdding === product.id}

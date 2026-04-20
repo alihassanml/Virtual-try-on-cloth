@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { api } from '../services/api';
 import { motion } from 'framer-motion';
-import { Mail, Lock, Loader2, ArrowRight, Sparkles } from 'lucide-react';
+import { Mail, Lock, Loader2, ArrowRight } from 'lucide-react';
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -49,11 +49,6 @@ const LoginPage: React.FC = () => {
 
         {/* Brand */}
         <div className="absolute top-8 left-8 flex items-center gap-2.5">
-          <div className="w-9 h-9 rounded-xl flex items-center justify-center"
-            style={{ background: 'linear-gradient(135deg, #d946ef, #f472b6)' }}
-          >
-            <Sparkles className="w-4.5 h-4.5 text-white" />
-          </div>
           <span className="text-white font-black text-xl tracking-tight">
             Try<span className="text-transparent bg-clip-text"
               style={{ backgroundImage: 'linear-gradient(135deg, #d946ef, #f472b6)' }}>And</span>Buy
@@ -83,11 +78,6 @@ const LoginPage: React.FC = () => {
 
         {/* Mobile logo */}
         <div className="lg:hidden flex items-center gap-2 mb-10 self-start">
-          <div className="w-8 h-8 rounded-xl flex items-center justify-center"
-            style={{ background: 'linear-gradient(135deg, #d946ef, #f472b6)' }}
-          >
-            <Sparkles className="w-4 h-4 text-white" />
-          </div>
           <span className="text-white font-black text-lg tracking-tight">
             Try<span className="text-transparent bg-clip-text"
               style={{ backgroundImage: 'linear-gradient(135deg, #d946ef, #f472b6)' }}>And</span>Buy
